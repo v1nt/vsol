@@ -12,7 +12,6 @@ public class Club implements Comparable<Club> {
 	private String division;
 	private List<Match> matches;
 	private Championship champ;
-	private int points = 0;
 
 	public Club(int id, String name, String div, List<Match> matches) {
 		this.id = id;
@@ -81,11 +80,7 @@ public class Club implements Comparable<Club> {
 	public Race getLastRace() {
 		return champ.getLastRace();
 	}
-	
-	public void addPoints(int points) {
-		this.points += points;
-	}
-	
+
 	public String getClubInfoRow() {
 		StringBuilder sb = new StringBuilder(CELL_HEADER);
 		sb.append("[url=");
