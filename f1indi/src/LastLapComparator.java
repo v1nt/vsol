@@ -4,7 +4,7 @@ public class LastLapComparator implements Comparator<Club> {
 	public int compare(Club club1, Club club2) {
 
 		Lap lap1 = club1.getChamp().getLastRace().getLastLap();
-		Lap lap2 = club1.getChamp().getLastRace().getLastLap();
+		Lap lap2 = club2.getChamp().getLastRace().getLastLap();
 
 		if(lap2.getSpeed() != lap1.getSpeed()) {
 			return lap2.getSpeed() - lap1.getSpeed();

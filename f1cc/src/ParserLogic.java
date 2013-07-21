@@ -6,9 +6,10 @@ import java.util.regex.*;
 public class ParserLogic {
 
 	private static String content;
+	private static long startTime = 0;
 
 	public static void run(boolean isCountry) throws IOException {
-		long startTime = System.currentTimeMillis();
+		startTime = System.currentTimeMillis();
 
 		List<Team> teams = new ArrayList<Team>();
 		List<Club> clubs = new ArrayList<Club>();
