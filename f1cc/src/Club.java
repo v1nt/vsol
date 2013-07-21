@@ -79,12 +79,12 @@ public class Club implements Comparable<Club> {
 		return champ.getLastRace().getLastLap();
 	}
 
-	public GrandPri getLastRace() {
+	public Race getLastRace() {
 		return champ.getLastRace();
 	}
 
 	public String getClubInfoRow() {
-		StringBuilder sb = new StringBuilder(CELL_HEADER);
+		StringBuilder sb = new StringBuilder("[th]");
 		sb.append("[url=");
 		sb.append(Constants.URL_CLUB);
 		sb.append(id);
@@ -94,10 +94,7 @@ public class Club implements Comparable<Club> {
 		} else {
 			sb.append("10");
 		}
-		sb.append("]");
-		sb.append(name);
-		sb.append("[/url]");
-		sb.append(CELL_FOOTER);
+		sb.append("]link[/url][/th]");
 
 		return sb.toString();		
 

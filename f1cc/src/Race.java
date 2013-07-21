@@ -1,10 +1,10 @@
 import java.util.*;
 
-public class GrandPri {
+public class Race {
 	private boolean finished;
 	private List<Lap> laps;
 
-	public GrandPri(List<Match> matches) {
+	public Race(List<Match> matches) {
 		finished = (matches.size() == Championship.LAPS_PER_RACE);
 		laps = new ArrayList<Lap>();
 		for(Match match : matches) {

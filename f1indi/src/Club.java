@@ -138,9 +138,9 @@ public class Club implements Comparable<Club> {
 		sb.append("[img]http://www.virtualsoccer.ru/styles/");
 		sb.append(lap.getMatch().getEnemyStyle());
 		sb.append(".png[/img]");
-		sb.append(CELL_SPLITTER);
+		sb.append("[/td][th]");
 		sb.append(lap.getSpeed());
-		sb.append(CELL_FOOTER);
+		sb.append("[/th]");
 
 		return sb.toString();		
 	}
@@ -153,20 +153,22 @@ public class Club implements Comparable<Club> {
 			sb.append((lap.getSpeed() == 0 ? "O" : lap.getSpeed()));
 			sb.append(CELL_FOOTER);
 		}
-		sb.append(CELL_HEADER);
+		sb.append("[th]");
 		sb.append(getLastRace().getSpeed());
-		sb.append(CELL_SPLITTER);
+		sb.append("[/th][td]");
 		sb.append(getLastRace().getPluses());
 		sb.append(CELL_SPLITTER);
 		sb.append(getLastRace().getMinuses());
+		sb.append(CELL_SPLITTER);
+		sb.append(getLastRace().getResult());
 		sb.append(CELL_SPLITTER);
 		sb.append(getLastRace().getSummary());
 		sb.append(CELL_FOOTER);
 		
 		if(getLastRace().getLaps().size() == 3) {
-			sb.append(CELL_HEADER);
+			sb.append("[th]");
 			sb.append(getLastRace().getPoints());
-			sb.append(CELL_FOOTER);
+			sb.append("[/th]");
 		}
 
 

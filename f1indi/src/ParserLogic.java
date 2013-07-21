@@ -54,10 +54,6 @@ public class ParserLogic {
 		try {
 			Scanner sc = new Scanner(new FileReader(Constants.CFG_FILE_NAME));
 			season = sc.nextLine();
-/*			while(sc.hasNext()) {
-				clubs.add(getClub(Integer.parseInt(sc.nextLine())));
-			}
-*/
 			sc.close();
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -108,13 +104,7 @@ public class ParserLogic {
 		Matcher gameMatcher = Pattern.compile(Constants.PATTERN_GAMES).matcher(
 				content);
 		List<Match> matches = new ArrayList<Match>();
-		int lapsNumber = 1;
 		while(gameMatcher.find()) {
-			
-			if((lapsNumber++) > 3) {
-				break;
-			}
-			
 			String result, location, as, matchDay, matchId, goals, plus, minus;
 
 			result = gameMatcher.group(1);
@@ -219,17 +209,19 @@ public class ParserLogic {
 		System.out.print(lastLapNumber);
 		System.out.println("[/b][/color][/size]");
 
-		System.out.println("[table][tr][th]rank[/th][th]club[/th][th]match[/th][th][img]http://www.virtualsoccer.ru/pics/up.gif[/img][/th][th][img]http://www.virtualsoccer.ru/pics/down.gif[/img][/th][th]style[/th][th]enemy[/th][th]speed[/th][/tr]");
+		System.out.println("[table]");
+		System.out.print("[tr][th]rank[/th][th]club[/th][th]match[/th][th][img]http://www.virtualsoccer.ru/pics/up.gif[/img][/th][th][img]http://www.virtualsoccer.ru/pics/down.gif[/img][/th][th]style[/th][th]enemy[/th][th]speed[/th][/tr]");
 
 		int rank = 1;
 		for(Club club : clubs) {
-			System.out.print("[tr][td]");
+			System.out.print("[tr][th]");
 			System.out.print(rank++);
-			System.out.print("[/td]");
+			System.out.print("[/th]");
 			System.out.print(club.getLastLapRow());
 			System.out.println("[/tr]");
 		}
 
+		System.out.print("[tr][th]rank[/th][th]club[/th][th]match[/th][th][img]http://www.virtualsoccer.ru/pics/up.gif[/img][/th][th][img]http://www.virtualsoccer.ru/pics/down.gif[/img][/th][th]style[/th][th]enemy[/th][th]speed[/th][/tr]");
 		System.out.println("[/table][/spoiler]");
 	}
 	
@@ -260,14 +252,15 @@ public class ParserLogic {
 		}
 		System.out.println("[/b][/color][/size]");
 
-		System.out.print("[table][tr][th]rank[/th][th]club[/th]");
+		System.out.print("[table]");
+		System.out.print("[tr][th]rank[/th][th]club[/th]");
 		for(int i = 1; i <= lastLapNumber; i++) {
 			System.out.print("[th]lap" + i + " spd[/th]");
 		}
 		System.out.print("[th]sum spd[/th]");
 		System.out.print("[th][img]http://www.virtualsoccer.ru/pics/up.gif[/img][/th]");
 		System.out.print("[th][img]http://www.virtualsoccer.ru/pics/down.gif[/img][/th]");
-		System.out.print("[th]goals[/th]");
+		System.out.print("[th]results[/th][th]goals[/th]");
 		if(lastLapNumber == 3) {
 			System.out.print("[th]race points[/th]");
 		}
@@ -275,12 +268,24 @@ public class ParserLogic {
 
 		int rank = 1;
 		for(Club club : clubs) {
-			System.out.print("[tr][td]");
+			System.out.print("[tr][th]");
 			System.out.print(rank++);
-			System.out.print("[/td]");
+			System.out.print("[/th]");
 			System.out.print(club.getLastRaceRow());
 			System.out.println("[/tr]");
 		}
+		System.out.print("[tr][th]rank[/th][th]club[/th]");
+		for(int i = 1; i <= lastLapNumber; i++) {
+			System.out.print("[th]lap" + i + " spd[/th]");
+		}
+		System.out.print("[th]sum spd[/th]");
+		System.out.print("[th][img]http://www.virtualsoccer.ru/pics/up.gif[/img][/th]");
+		System.out.print("[th][img]http://www.virtualsoccer.ru/pics/down.gif[/img][/th]");
+		System.out.print("[th]results[/th][th]goals[/th]");
+		if(lastLapNumber == 3) {
+			System.out.print("[th]race points[/th]");
+		}
+		System.out.println("[/tr]");
 		System.out.println("[/table][/spoiler]");
 	}
 	
@@ -297,7 +302,8 @@ public class ParserLogic {
 			System.out.println("Турнирная таблица[/b][/color][/size]");
 
 			int rank = 1;
-			System.out.print("[table][tr][th]rank[/th][th]club[/th]");
+			System.out.println("[table]");
+			System.out.print("[tr][th]rank[/th][th]club[/th]");
 			for(int raceIndex = 1; raceIndex <= racesNumber; raceIndex++) {
 				System.out.print("[th]race ");
 				System.out.print(raceIndex);
@@ -310,15 +316,22 @@ public class ParserLogic {
 					break;
 				}
 				
-				System.out.print("[tr][td]"+(rank++)+"[/td][td][url=" + club.getUrl() 
+				System.out.print("[tr][th]"+(rank++)+"[/th][td][url=" + club.getUrl() 
 						+ "]" + club.getName() + "[/url][/td]");
 				for(int raceIndex = 1; raceIndex <= racesNumber; raceIndex++) {
 					System.out.print("[td]");
 					System.out.print(club.getChamp().getRaces().get(raceIndex-1).getPoints());
 					System.out.print("[/td]");
 				}
-				System.out.println("[td]" + club.getPoints() + "[/td][/tr]");
+				System.out.println("[th]" + club.getPoints() + "[/th][/tr]");
 			}
+			System.out.print("[tr][th]rank[/th][th]club[/th]");
+			for(int raceIndex = 1; raceIndex <= racesNumber; raceIndex++) {
+				System.out.print("[th]race ");
+				System.out.print(raceIndex);
+				System.out.print("[/th]");
+			}
+			System.out.println("[th]points[/th][/tr]");
 			System.out.println("[/table][/spoiler]");
 		}
 	}

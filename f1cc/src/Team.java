@@ -38,15 +38,15 @@ public class Team {
 	public int getBestSpeed(int raceIndex) {
 		int bestSpeed = -30;
 		int lapsNumber = clubs[0].getChamp().getRaces().get(raceIndex).getLaps().size();
-			for(int lapIndex = 0; lapIndex < lapsNumber; lapIndex++) {
-				int lapSpeed = 0;
-				for(int clubIndex = 0; clubIndex < 2; clubIndex++) {
-					lapSpeed += clubs[clubIndex].getChamp().getRaces().get(raceIndex).getLaps().get(lapIndex).getSpeed();
-				}
-				if(lapSpeed > bestSpeed) {
-					bestSpeed = lapSpeed;
-				}
+		for(int lapIndex = 0; lapIndex < lapsNumber; lapIndex++) {
+			int lapSpeed = 0;
+			for(int clubIndex = 0; clubIndex < 2; clubIndex++) {
+				lapSpeed += clubs[clubIndex].getChamp().getRaces().get(raceIndex).getLaps().get(lapIndex).getSpeed();
 			}
+			if(lapSpeed > bestSpeed) {
+				bestSpeed = lapSpeed;
+			}
+		}
 		return bestSpeed;
 	}
 	
@@ -62,6 +62,89 @@ public class Team {
 	public int getLastRaceSpeed() {
 		return clubs[0].getLastRace().getSpeed() 
 				+ clubs[1].getLastRace().getSpeed(); 
+	}
+	
+	public int getPlusMinusDif(int raceIndex) {
+		int plusMinusDif = 0;
+		Race race = clubs[0].getChamp().getRaces().get(raceIndex);
+		for(int lap = 0; lap < race.getLaps().size(); lap++) {
+			for(int clubIndex = 0; clubIndex < 2; clubIndex++) {
+				plusMinusDif += race.getLaps().get(lap).getMatch().getPlus() 
+						- race.getLaps().get(lap).getMatch().getMinus();
+			}
+		}
+		return plusMinusDif;
+	}
+	
+	public int getPluses(int raceIndex) {
+		int pluses = 0;
+		Race race = clubs[0].getChamp().getRaces().get(raceIndex);
+		for(int lap = 0; lap < race.getLaps().size(); lap++) {
+			for(int clubIndex = 0; clubIndex < 2; clubIndex++) {
+				pluses += race.getLaps().get(lap).getMatch().getPlus();
+			}
+		}
+		return pluses;
+	}
+	
+	public int getMinuses(int raceIndex) {
+		int minuses = 0;
+		Race race = clubs[0].getChamp().getRaces().get(raceIndex);
+		for(int lap = 0; lap < race.getLaps().size(); lap++) {
+			for(int clubIndex = 0; clubIndex < 2; clubIndex++) {
+				minuses += race.getLaps().get(lap).getMatch().getMinus();
+			}
+		}
+		return minuses;
+	}
+
+	public int getResult(int raceIndex) {
+		int result = 0;
+		Race race = clubs[0].getChamp().getRaces().get(raceIndex);
+		for(int lap = 0; lap < race.getLaps().size(); lap++) {
+			for(int clubIndex = 0; clubIndex < 2; clubIndex++) {
+				result += race.getLaps().get(lap).getMatch().getResult();
+			}
+		}
+		return result;
+	}
+	
+	public int getGoalsDif(int raceIndex) {
+		int goalsDif = 0;
+		Race race = clubs[0].getChamp().getRaces().get(raceIndex);
+		for(int lap = 0; lap < race.getLaps().size(); lap++) {
+			for(int clubIndex = 0; clubIndex < 2; clubIndex++) {
+				goalsDif += race.getLaps().get(lap).getMatch().getScoredGoals() 
+						- race.getLaps().get(lap).getMatch().getAgainstGoals();
+			}
+		}
+		return goalsDif;
+	}
+	
+	public int getScoredGoals(int raceIndex) {
+		int scoredGoals = 0;
+		Race race = clubs[0].getChamp().getRaces().get(raceIndex);
+		for(int lap = 0; lap < race.getLaps().size(); lap++) {
+			for(int clubIndex = 0; clubIndex < 2; clubIndex++) {
+				scoredGoals += race.getLaps().get(lap).getMatch().getScoredGoals();
+			}
+		}
+		return scoredGoals;
+	}
+	
+	public int getAgainstGoals(int raceIndex) {
+		int againstGoals = 0;
+		Race race = clubs[0].getChamp().getRaces().get(raceIndex);
+		for(int lap = 0; lap < race.getLaps().size(); lap++) {
+			for(int clubIndex = 0; clubIndex < 2; clubIndex++) {
+				againstGoals += race.getLaps().get(lap).getMatch().getAgainstGoals();
+			}
+		}
+		return againstGoals;
+	}
+	
+	public String getSummary(int raceIndex) {
+		return getScoredGoals(raceIndex) + " - " + getAgainstGoals(raceIndex);
 	}
 	
 	public int[] getLastRaceSpeeds() {
